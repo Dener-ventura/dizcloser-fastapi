@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: dizcloser-api
+    env: python
+    buildCommand: ""
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port 10000
+    plan: free
+    runtime: python
+    region: oregon
+    branch: main
+    autoDeploy: true
