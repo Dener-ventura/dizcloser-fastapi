@@ -1,24 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Dizcloser</title>
-</head>
-<body>
-  <h1>Problemas Recentes</h1>
-  <ul>
-    {% for problem in problems %}
-      <li>
-        <strong>{{ problem.title }}</strong><br>
-        {{ problem.description }}
-      </li>
-    {% endfor %}
-  </ul>
+{% extends "base.html" %}
 
-  <h2>Enviar novo problema</h2>
-  <form method="post" action="/problems">
-    <input type="text" name="title" placeholder="Título" required><br>
-    <textarea name="description" placeholder="Descreva o problema..." required></textarea><br>
-    <button type="submit">Enviar</button>
-  </form>
-</body>
-</html>
+{% block content %}
+<h2>Discussões em Aberto</h2>
+<a href="/new" class="btn btn-primary my-3">Nova Discussão</a>
+
+{% for problem in problems %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">{{ problem.title }}</h5>
+            <p class="card-text">{{ problem.description }}</p>
+            <a href="/problem/{{ loop.index0 }}" class="btn btn-sm btn-outline-primary">Ver Discussão</a>
+        </div>
+    </div>
+{% else %}
+    <p>Nenhuma discussão foi iniciada ainda.</p>
+{% endfor %}
+{% endblock %}

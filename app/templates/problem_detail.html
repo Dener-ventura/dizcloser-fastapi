@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ problem.title }}</h2>
+<p>{{ problem.description }}</p>
+
+<hr>
+<h4>Respostas dos Intermediadores</h4>
+{% if problem.responses %}
+    {% for response in problem.responses %}
+        <div class="card mb-2">
+            <div class="card-body">
+                <p>{{ response }}</p>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>Sem respostas ainda.</p>
+{% endif %}
+
+<hr>
+<h4>Responder como Intermediador</h4>
+<form action="/problem/{{ id }}/respond" method="post">
+    <div class="mb-3">
+        <textarea name="response" class="form-control" rows="3" placeholder="Sua resposta" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar Resposta</button>
+</form>
+{% endblock %}
